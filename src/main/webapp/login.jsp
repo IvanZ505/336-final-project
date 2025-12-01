@@ -18,11 +18,19 @@
         <input type="submit" value="Login">
     </form>
     
-    <%-- Display a message if login failed --%>
+    <br>
+    <a href="register.jsp">Don't have an account? Create one here</a>
+    
+    <%-- show message when login fails--%>
     <% 
         String error = request.getParameter("error");
+        String messge = request.getParameter("messge");
+        
         if (error != null && error.equals("1")) {
-            out.println("<p style='color:red;'>Invalid username or password.</p>");
+            out.println("<p style='color:red;'>Invalid username or password</p>");
+        }
+        if (messge != null) {
+            out.println("<p style='color:green;'>" + messge + "</p>");
         }
     %>
 </body>

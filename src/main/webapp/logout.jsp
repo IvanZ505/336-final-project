@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <%
-    // Invalidate the session to log the user out
+    // invalidate session, log user out
     session.invalidate();
     
-    // Redirect back to the login page
+    // redirection back to login page
     response.sendRedirect("login.jsp");
 %>

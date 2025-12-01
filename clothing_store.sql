@@ -20,7 +20,7 @@ CREATE TABLE `CUSTOMER_REP` (
     `rep_id` INT PRIMARY KEY,
     `admin_id` INT,
     CONSTRAINT `fk_rep_user` FOREIGN KEY (`rep_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE,
-    CONSTRAINT `fk_rep_admin` FOREIGN KEY (`admin_id`) REFERENCES `ADMIN`(`admin_id`)
+    CONSTRAINT `fk_rep_admin` FOREIGN KEY (`admin_id`) REFERENCES `ADMIN`(`admin_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `END_USER` (
@@ -28,6 +28,7 @@ CREATE TABLE `END_USER` (
     CONSTRAINT `fk_enduser_user` FOREIGN KEY (`user_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE
 );
 
+-- UPDATED: Added ON DELETE CASCADE so items are removed if the seller is deleted
 CREATE TABLE `ITEM` (
     `item_id` INT PRIMARY KEY AUTO_INCREMENT,
     `title` VARCHAR(50) NOT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE `ITEM` (
     `current_bid` DECIMAL(10, 2),
     `description` TEXT,
     `seller_id` INT,
-    CONSTRAINT `fk_item_seller` FOREIGN KEY (`seller_id`) REFERENCES `END_USER`(`user_id`)
+    CONSTRAINT `fk_item_seller` FOREIGN KEY (`seller_id`) REFERENCES `END_USER`(`user_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `SHIRT` (
@@ -76,8 +77,8 @@ CREATE TABLE `SUPPORTS` (
     `action_time` DATETIME,
     `user_id` INT,
     `rep_id` INT,
-    CONSTRAINT `fk_supports_user` FOREIGN KEY (`user_id`) REFERENCES `END_USER`(`user_id`),
-    CONSTRAINT `fk_supports_rep` FOREIGN KEY (`rep_id`) REFERENCES `CUSTOMER_REP`(`rep_id`)
+    CONSTRAINT `fk_supports_user` FOREIGN KEY (`user_id`) REFERENCES `END_USER`(`user_id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_supports_rep` FOREIGN KEY (`rep_id`) REFERENCES `CUSTOMER_REP`(`rep_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `SETS_ALERT` (
@@ -92,8 +93,8 @@ CREATE TABLE `SETS_ALERT` (
     `min_price` DECIMAL(10, 2),
     `max_price` DECIMAL(10, 2),
     PRIMARY KEY (`user_id`, `item_id`),
-    CONSTRAINT `fk_alert_user` FOREIGN KEY (`user_id`) REFERENCES `USER`(`user_id`),
-    CONSTRAINT `fk_alert_item` FOREIGN KEY (`item_id`) REFERENCES `ITEM`(`item_id`)
+    CONSTRAINT `fk_alert_user` FOREIGN KEY (`user_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_alert_item` FOREIGN KEY (`item_id`) REFERENCES `ITEM`(`item_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `BID` (
@@ -115,8 +116,8 @@ CREATE TABLE `RECEIVES` (
     `item_id` INT,
     `bid_id` INT,
     PRIMARY KEY (`item_id`, `bid_id`),
-    CONSTRAINT `fk_receives_item` FOREIGN KEY (`item_id`) REFERENCES `ITEM`(`item_id`),
-    CONSTRAINT `fk_receives_bid` FOREIGN KEY (`bid_id`) REFERENCES `BID`(`bid_id`)
+    CONSTRAINT `fk_receives_item` FOREIGN KEY (`item_id`) REFERENCES `ITEM`(`item_id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_receives_bid` FOREIGN KEY (`bid_id`) REFERENCES `BID`(`bid_id`) ON DELETE CASCADE
 );
 
 
@@ -124,10 +125,15 @@ CREATE TABLE `PLACES` (
     `user_id` INT,
     `bid_id` INT,
     PRIMARY KEY (`user_id`, `bid_id`),
-    CONSTRAINT `fk_places_user` FOREIGN KEY (`user_id`) REFERENCES `USER`(`user_id`),
-    CONSTRAINT `fk_places_bid` FOREIGN KEY (`bid_id`) REFERENCES `BID`(`bid_id`)
+    CONSTRAINT `fk_places_user` FOREIGN KEY (`user_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_places_bid` FOREIGN KEY (`bid_id`) REFERENCES `BID`(`bid_id`) ON DELETE CASCADE
 );
 
 -- Add a sample user for testing the login functionality
 INSERT INTO `USER` (`name`, `address`, `email`, `password`, `username`) 
 VALUES ('Test User', '123 Main St', 'test@example.com', 'password123', 'testuser');
+
+-- CRITICAL FIX: Add the test user to the END_USER table as well
+-- This is required because of the Foreign Key constraint on the ITEM table (seller_id -> end_user.user_id)
+INSERT INTO `END_USER` (`user_id`) 
+SELECT `user_id` FROM `USER` WHERE `username` = 'testuser';
