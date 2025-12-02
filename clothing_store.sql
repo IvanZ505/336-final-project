@@ -13,11 +13,14 @@ CREATE TABLE `USER` (
 
 CREATE TABLE `ADMIN` (
     `admin_id` INT PRIMARY KEY,
+    `admin_pass` VARCHAR(20) NOT NULL,
     CONSTRAINT `fk_admin_user` FOREIGN KEY (`admin_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `CUSTOMER_REP` (
     `rep_id` INT PRIMARY KEY,
+    `rep_pass` VARCHAR(20) NOT NULL,
+    `name` VARCHAR(60),
     `admin_id` INT,
     CONSTRAINT `fk_rep_user` FOREIGN KEY (`rep_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE,
     CONSTRAINT `fk_rep_admin` FOREIGN KEY (`admin_id`) REFERENCES `ADMIN`(`admin_id`)
@@ -131,3 +134,5 @@ CREATE TABLE `PLACES` (
 -- Add a sample user for testing the login functionality
 INSERT INTO `USER` (`name`, `address`, `email`, `password`, `username`) 
 VALUES ('Test User', '123 Main St', 'test@example.com', 'password123', 'testuser');
+
+INSERT INTO `admin` (`admin_id`, `admin_pass`) VALUES (1, '12345');

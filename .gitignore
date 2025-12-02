@@ -1,1 +1,7 @@
 apache-*
+/bin/
+.settings
+.metadata
+.classpath
+.project
+/bin/
