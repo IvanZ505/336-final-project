@@ -18,8 +18,10 @@
         if(repName != null && !repName.isEmpty()) {
             // Check if admin is logged in
             if(adminId == null) {
+            	// adminId = 1;
                 out.println("<p style='color: red;'>Error: You must be logged in as an admin to create accounts.</p>");
-            } else {
+            }
+            else {
                 try {
                     // Get connection using ApplicationDB
                     connection = db.getConnection();
@@ -39,7 +41,7 @@
                     pstatement.close();
                     
                     // Now insert the new record
-                    String insertQuery = "INSERT INTO customer_rep(rep_id, admin_id, rep_name, rep_pass) VALUES(?, ?, ?, ?)";
+                    String insertQuery = "INSERT INTO customer_rep(rep_id, admin_id, name, rep_pass) VALUES(?, ?, ?, ?)";
                     pstatement = connection.prepareStatement(insertQuery);
                     pstatement.setInt(1, nextRepId);
                     pstatement.setInt(2, adminId);

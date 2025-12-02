@@ -5,3 +5,4 @@ apache-*
 .classpath
 .project
 /bin/
+/webapp/
