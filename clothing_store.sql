@@ -74,6 +74,7 @@ CREATE TABLE `SHOE` (
 CREATE TABLE `SUPPORTS` (
     `log_id` INT PRIMARY KEY AUTO_INCREMENT,
     `reason` TEXT,
+    `answer` TEXT,
     `action_type` VARCHAR(10),
     `action_time` DATETIME,
     `user_id` INT,

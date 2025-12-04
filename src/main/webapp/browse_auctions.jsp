@@ -22,6 +22,7 @@
         <a href="welcome.jsp">Home</a> | 
         <a href="create_auction.jsp">Sell Item</a> | 
         <a href="browse_auctions.jsp">Browse Auctions</a> | 
+        <a href="help.jsp">Help</a> |
         <a href="logout.jsp">Logout</a>
     </div>
 
