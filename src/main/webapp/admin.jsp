@@ -6,83 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Dashboard</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 50px;
-    }
-    .greeting {
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-    .stats {
-        font-size: 18px;
-        color: #555;
-        margin-bottom: 30px;
-    }
-    table { 
-        width: 100%; 
-        border-collapse: collapse; 
-        margin-top: 20px; 
-    }
-    th, td { 
-        padding: 10px; 
-        border: 1px solid #ddd; 
-        text-align: left; 
-    }
-    tr:nth-child(even) { 
-        background-color: #f2f2f2; 
-    }
-    th { 
-        background-color: #4CAF50; 
-        color: white; 
-    }
-    .section {
-        margin-top: 40px;
-        border-top: 2px solid #ddd;
-        padding-top: 20px;
-    }
-    .submit-btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-    .submit-btn:hover {
-        background-color: #45a049;
-    }
-    input[type="text"], input[type="password"] {
-        width: 300px;
-        padding: 8px;
-    }
-    .form-group {
-        margin-bottom: 15px;
-    }
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-    .report-box {
-        background-color: #f9f9f9;
-        padding: 20px;
-        border-radius: 5px;
-        margin-bottom: 20px;
-    }
-    .total-earnings {
-        font-size: 24px;
-        font-weight: bold;
-        color: #4CAF50;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
     <%-- nav bar --%>
-    <div style="background: #eee; padding: 10px; margin-bottom: 20px;">
+    <div class="navbar">
         <a href="admin.jsp">Dashboard</a> | 
         <a href="logout.jsp">Logout</a>
     </div>

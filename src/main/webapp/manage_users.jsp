@@ -6,79 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Manage Users</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 50px;
-    }
-    table { 
-        width: 100%; 
-        border-collapse: collapse; 
-        margin-top: 20px; 
-    }
-    th, td { 
-        padding: 10px; 
-        border: 1px solid #ddd; 
-        text-align: left; 
-    }
-    tr:nth-child(even) { 
-        background-color: #f2f2f2; 
-    }
-    th { 
-        background-color: #4CAF50; 
-        color: white; 
-    }
-    .submit-btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 8px 15px;
-        border: none;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-    .submit-btn:hover {
-        background-color: #45a049;
-    }
-    .delete-btn {
-        background-color: #f44336;
-        color: white;
-        padding: 8px 15px;
-        border: none;
-        cursor: pointer;
-    }
-    .delete-btn:hover {
-        background-color: #da190b;
-    }
-    .edit-btn {
-        background-color: #2196F3;
-        color: white;
-        padding: 8px 15px;
-        border: none;
-        cursor: pointer;
-    }
-    .edit-btn:hover {
-        background-color: #0b7dda;
-    }
-    input[type="text"], input[type="email"] {
-        padding: 8px;
-        width: 250px;
-    }
-    .search-section {
-        background-color: #f9f9f9;
-        padding: 20px;
-        border-radius: 5px;
-        margin-bottom: 30px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
     <%-- nav bar --%>
-    <div style="background: #eee; padding: 10px; margin-bottom: 20px;">
+    <div class="navbar">
         <a href="rep.jsp">Dashboard</a> | 
         <a href="answer_questions.jsp">Answer Questions</a> | 
         <a href="manage_users.jsp">Manage Users</a> |
-        <a href="manage_bids.jsp">Manage Bids</a> |
         <a href="manage_auctions.jsp">Manage Auctions</a> |
         <a href="logout.jsp">Logout</a>
     </div>

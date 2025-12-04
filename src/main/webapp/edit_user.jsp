@@ -5,63 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Edit User</title>
-<style>
-    body { 
-        font-family: Arial, sans-serif; 
-        margin: 50px; 
-    }
-    .form-group {
-        margin-bottom: 15px;
-    }
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-    input[type="text"], input[type="email"], input[type="password"], select { 
-        width: 100%; 
-        max-width: 400px;
-        padding: 8px; 
-        margin: 5px 0; 
-        box-sizing: border-box;
-    }
-    .submit-btn { 
-        background-color: #4CAF50; 
-        color: white; 
-        padding: 10px 20px; 
-        border: none; 
-        cursor: pointer; 
-        margin-right: 10px;
-    }
-    .submit-btn:hover {
-        background-color: #45a049;
-    }
-    .cancel-btn {
-        background-color: #888;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-    }
-    .cancel-btn:hover {
-        background-color: #666;
-    }
-    .help-text {
-        font-size: 12px;
-        color: #666;
-        margin-top: 3px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <%-- nav bar --%>
-    <div style="background: #eee; padding: 10px; margin-bottom: 20px;">
+    <div class="navbar">
         <a href="rep.jsp">Dashboard</a> | 
         <a href="answer_questions.jsp">Answer Questions</a> | 
         <a href="manage_users.jsp">Manage Users</a> |
-        <a href="manage_bids.jsp">Manage Bids</a> |
         <a href="manage_auctions.jsp">Manage Auctions</a> |
         <a href="logout.jsp">Logout</a>
     </div>

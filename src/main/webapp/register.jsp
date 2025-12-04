@@ -5,10 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Register</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <h2>Create an Account</h2>
-    <form action="register_process.jsp" method="post">
+    <form action="register_process.jsp" method="post", style="width: 35vw; height: fit-content;">
         <label>Username:</label>
         <input type="text" name="username" required><br><br>
         

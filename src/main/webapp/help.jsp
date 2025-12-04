@@ -6,24 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Help & Support</title>
-<style>
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-    tr:nth-child(even) { background-color: #f2f2f2; }
-    th { background-color: #4CAF50; color: white; }
-    textarea { width: 100%; height: 120px; }
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
     <%-- nav bar --%>
-    <div style="background: #eee; padding: 10px; margin-bottom: 20px;">
+    <div class="navbar">
         <a href="welcome.jsp">Home</a> | 
         <a href="create_auction.jsp">Sell Item</a> | 
         <a href="browse_auctions.jsp">Browse Auctions</a> | 
         <a href="help.jsp">Help</a> |
         <a href="logout.jsp">Logout</a>
     </div>
+
 
     <h2>Contact Customer Support</h2>
     <p>Please describe your question below. A customer representative will respond as soon as possible.</p>

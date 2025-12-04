@@ -6,17 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>History & Alerts</title>
-<style>
-    /* styles for tables*/
-    table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-    th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-    th { background-color: #4CAF50; color: white; }
-    /* status colors */
-    .win { color: green; font-weight: bold; }
-    .loss { color: red; }
-    .reserve-fail { color: orange; }
-    .delete-btn { background-color: #ff4444; color: white; border: none; padding: 5px 10px; cursor: pointer; font-size: 0.8em; }
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 <script>
     function confirmDeleteItem() {
         return confirm("Are you sure you want to delete this listing? This action can't be undone.");
@@ -27,9 +17,12 @@
     <%-- shows the auction history of the user --%>
     <%-- includes catgories of auctions the user won and the items they have or are selling --%> 
 
-    <div style="background: #eee; padding: 10px; margin-bottom: 20px;">
+    <div class="navbar">
         <a href="welcome.jsp">Home</a> | 
-        <a href="browse_auctions.jsp">Browse Auctions</a>
+        <a href="create_auction.jsp">Sell Item</a> | 
+        <a href="browse_auctions.jsp">Browse Auctions</a> | 
+        <a href="help.jsp">Help</a> |
+        <a href="logout.jsp">Logout</a>
     </div>
 
     <% 

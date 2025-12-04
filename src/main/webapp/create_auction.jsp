@@ -27,7 +27,46 @@
     .required { color: red; }
     .optional { font-size: 0.9em; color: #666; }
     .error-msg { color: red; font-weight: bold; background-color: #ffe6e6; padding: 10px; border: 1px solid red; margin-bottom: 15px; }
-</style>
+	
+	* {
+	    margin: 0;
+	    padding: 0;
+	    box-sizing: border-box;
+	}
+	
+	body {
+		padding: 2px 10px;
+		margin: 5px 10px;
+	    font-family: 'Arial', sans-serif;
+	    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+	    min-height: 100vh;
+	    color: #ffffff;
+	}
+	
+	input,
+	select,
+	textarea {
+	    padding: 15px 0;
+	    background: transparent;
+	    border: none;
+	    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+	    color: #ffffff;
+	    font-size: 16px;
+	    outline: none;
+	    transition: border-color 0.3s ease;
+
+	}
+	
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+	  -webkit-appearance: none;
+	  margin: 0;
+	}
+	
+	input[type="number"] {
+	  -moz-appearance: textfield;
+	}
+	</style>
 </head>
 <body onload="showSubtypeFields()">
 
@@ -203,11 +242,16 @@
         <label for="auction_end">Auction End (Date and Time) <span class="required">*</span>:</label>
         <input type="datetime-local" id="auction_end" name="auction_end" required><br><br>
 
-        <input type="submit" value="Create Auction">
+        <input type="submit" value="Create Auction" style="display:inline-block; 
+        	background:#fff; color:#000; padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:bold;">
     </form>
     
     <br>
-    <a href="welcome.jsp">Back to Welcome Page</a>
+	<a href="welcome.jsp" 
+	   style="display:inline-block; background:#fff; color:#000; padding:8px 14px; 
+	          border-radius:6px; text-decoration:none; font-weight:bold;">
+	   Back to Welcome Page
+	</a>
 
 </body>
 </html>

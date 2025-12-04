@@ -7,18 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Browse Auctions</title>
-<style>
-    /* formatting for the tables*/
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-    tr:nth-child(even) { background-color: #f2f2f2; } 
-    th { background-color: #4CAF50; color: white; }
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
     <%-- nav bar to hold links to other parts of the site --%>
-    <div style="background: #eee; padding: 10px; margin-bottom: 20px;">
+    <div class="navbar">
         <a href="welcome.jsp">Home</a> | 
         <a href="create_auction.jsp">Sell Item</a> | 
         <a href="browse_auctions.jsp">Browse Auctions</a> | 

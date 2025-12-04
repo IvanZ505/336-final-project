@@ -1,0 +1,537 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+	padding: 2px 10px;
+	margin: 5px 10px;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: none;
+    backdrop-filter: blur(10px);
+    padding: 15px 50px;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar a {
+    text-decoration: none;
+    margin-right: 30px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #ffffff;
+}
+
+/* Main Containers */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 50px;
+}
+
+.login-container {
+    max-width: 500px;
+    width: 90%;
+    padding: 50px 40px;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Typography */
+.greeting {
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stats {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+h2, h3 {
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 40px 0 20px 0;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+}
+
+.container h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Messages */
+p[style*="color:green"], 
+p[style*="color:red"],
+.message {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border-left: 4px solid;
+    backdrop-filter: blur(10px);
+}
+
+p[style*="color:green"],
+.message.success {
+    background: rgba(81, 207, 102, 0.1);
+    border-left-color: #51cf66;
+    color: #51cf66 !important;
+}
+
+p[style*="color:red"],
+.message.error {
+    background: rgba(255, 107, 107, 0.1);
+    border-left-color: #ff6b6b;
+    color: #ff6b6b !important;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.container .form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.login-container label {
+    display: none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 15px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+select option {
+    background: #2d2d2d;
+    color: #ffffff;
+    padding: 12px;
+    font-size: 16px;
+    width: fit-content;
+}
+
+.container input[type="text"],
+.container input[type="password"],
+.container input[type="email"],
+.container input[type="number"] {
+    max-width: 400px;
+    padding: 12px 0;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="email"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    border-bottom-color: #ffffff;
+}
+
+select {
+    cursor: pointer;
+    padding: 12px 0;
+}
+
+textarea {
+    padding: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Radio Buttons */
+.user-type {
+    margin: 30px 0 40px 0;
+    text-align: left;
+}
+
+.user-type label {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-weight: normal;
+}
+
+.user-type label:first-child {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.user-type input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.user-type label:hover {
+    color: #ffffff;
+}
+
+/* Buttons */
+.submit-btn,
+input[type="submit"],
+button {
+    padding: 12px 30px;
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.login-container input[type="submit"] {
+    width: 100%;
+    max-width: 200px;
+    padding: 15px 40px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.submit-btn:hover,
+input[type="submit"]:hover,
+button:hover {
+    background: #ffffff;
+    color: #2d2d2d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+.delete-btn {
+    padding: 10px 25px;
+    background: transparent;
+    color: #ff6b6b;
+    border: 2px solid #ff6b6b;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0;
+}
+
+.delete-btn:hover {
+    background: #ff6b6b;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.edit-btn {
+    padding: 10px 25px;
+    background: transparent;
+    color: #51cf66;
+    border: 2px solid #51cf66;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-top: 0;
+}
+
+.edit-btn:hover {
+    background: #51cf66;
+    color: #2d2d2d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(81, 207, 102, 0.3);
+}
+
+.back-btn,
+.cancel-btn {
+    padding: 10px 25px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.back-btn:hover,
+.cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #ffffff;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 18px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+td {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Links */
+a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #51cf66;
+}
+
+.login-container a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.login-container a:hover {
+    color: #ffffff;
+}
+
+/* Special Boxes */
+.search-section,
+.report-box,
+.detail-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-section h3,
+.report-box h3,
+.detail-box h3 {
+    margin-top: 0;
+}
+
+.search-section p,
+.report-box p {
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.detail-box h3 {
+    font-size: 24px;
+}
+
+/* Total Earnings Display */
+.total-earnings {
+    font-size: 48px;
+    font-weight: bold;
+    color: #51cf66;
+    margin: 20px 0;
+    letter-spacing: 2px;
+}
+
+/* Info Rows (Detail View) */
+.info-row {
+    margin: 15px 0;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-label {
+    font-weight: bold;
+    display: inline-block;
+    width: 180px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Section Divider */
+.section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Lists */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 15px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+ul li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+ul li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+ul li a:hover {
+    color: #ffffff;
+    padding-left: 10px;
+}
+
+/* Help Text */
+.help-text {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+    
+    .navbar a {
+        display: block;
+        margin: 10px 0;
+    }
+    
+    .container {
+        padding: 30px 20px;
+    }
+    
+    .greeting {
+        font-size: 32px;
+    }
+    
+    h2 {
+        font-size: 24px;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 12px;
+    }
+}

@@ -6,20 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Item Details</title>
-    <style>
-    /* styling for info box and table of bid history */
-    .info-box { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; background: #f9f9f9; }
-    .bid-history { margin-top: 20px; width: 100%; border-collapse: collapse; }
-    .bid-history th, .bid-history td { border: 1px solid #ddd; padding: 8px; }
-    .error { color: red; font-weight: bold; }
-    .msg { color: green; font-weight: bold; }
-    </style>
+ <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <%-- links for navigation --%>
-    <div style="background: #eee; padding: 10px; margin-bottom: 20px;">
+    <div class="navbar">
         <a href="welcome.jsp">Home</a> | 
-        <a href="browse_auctions.jsp">Back to Auctions</a>
+        <a href="create_auction.jsp">Sell Item</a> | 
+        <a href="browse_auctions.jsp">Browse Auctions</a> | 
+        <a href="help.jsp">Help</a> |
+        <a href="logout.jsp">Logout</a>
     </div>
 
     <%-- check if url has error or msg in it, tell the user w/ red or green messages --%>

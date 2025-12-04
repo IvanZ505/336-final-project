@@ -6,33 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Customer Rep Dashboard</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 50px;
-    }
-    .greeting {
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-    .stats {
-        font-size: 18px;
-        color: #555;
-        margin-bottom: 30px;
-    }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-    tr:nth-child(even) { background-color: #f2f2f2; }
-    th { background-color: #4CAF50; color: white; }
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
     <%-- nav bar --%>
-    <div style="background: #eee; padding: 10px; margin-bottom: 20px;">
+    <div class="navbar">
         <a href="rep.jsp">Dashboard</a> | 
         <a href="answer_questions.jsp">Answer Questions</a> | 
+        <a href="manage_users.jsp">Manage Users</a> |
+        <a href="manage_auctions.jsp">Manage Auctions</a> |
         <a href="logout.jsp">Logout</a>
     </div>
 

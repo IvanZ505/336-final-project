@@ -6,86 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Manage Auctions</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 50px;
-    }
-    table { 
-        width: 100%; 
-        border-collapse: collapse; 
-        margin-top: 20px; 
-    }
-    th, td { 
-        padding: 10px; 
-        border: 1px solid #ddd; 
-        text-align: left; 
-    }
-    tr:nth-child(even) { 
-        background-color: #f2f2f2; 
-    }
-    th { 
-        background-color: #4CAF50; 
-        color: white; 
-    }
-    .submit-btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 8px 15px;
-        border: none;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-    }
-    .submit-btn:hover {
-        background-color: #45a049;
-    }
-    .delete-btn {
-        background-color: #f44336;
-        color: white;
-        padding: 8px 15px;
-        border: none;
-        cursor: pointer;
-    }
-    .delete-btn:hover {
-        background-color: #da190b;
-    }
-    .back-btn {
-        background-color: #888;
-        color: white;
-        padding: 8px 15px;
-        border: none;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-        margin-bottom: 20px;
-    }
-    .back-btn:hover {
-        background-color: #666;
-    }
-    .detail-box {
-        background-color: #f9f9f9;
-        padding: 20px;
-        border-radius: 5px;
-        margin-bottom: 30px;
-    }
-    .detail-box h3 {
-        margin-top: 0;
-    }
-    .info-row {
-        margin: 10px 0;
-    }
-    .info-label {
-        font-weight: bold;
-        display: inline-block;
-        width: 150px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 <body>
 
     <%-- nav bar --%>
-    <div style="background: #eee; padding: 10px; margin-bottom: 20px;">
+    <div class="navbar">
         <a href="rep.jsp">Dashboard</a> | 
         <a href="answer_questions.jsp">Answer Questions</a> | 
         <a href="manage_users.jsp">Manage Users</a> |
