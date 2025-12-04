@@ -25,7 +25,7 @@
                 <input type="radio" id="customer" name="userType" value="customer" checked>
                 <label for="user">Customer</label>
                 
-                <input type="radio" id="customer" name="userType" value="customer">
+                <input type="radio" id="customer" name="userType" value="customer_rep">
                 <label for="customer">Customer Representative</label>
                 
                 <input type="radio" id="admin" name="userType" value="admin">

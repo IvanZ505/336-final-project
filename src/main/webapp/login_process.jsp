@@ -29,12 +29,12 @@
             idColumn = "admin_id";
         } else if ("customer".equals(userType)) {
             // Query customer_rep table
-            query = "SELECT rep_id FROM customer_rep WHERE rep_name = ? AND password = ?";
-            idColumn = "rep_id";
-        } else {
-            // Query USER table (default)
             query = "SELECT user_id FROM USER WHERE username = ? AND password = ?";
             idColumn = "user_id";
+        } else {
+            query = "SELECT rep_id FROM customer_rep WHERE rep_id = ? AND rep_pass = ?";
+            idColumn = "rep_id";
+            
         }
 
         // Use preparedstatement to secure the query
@@ -53,11 +53,11 @@
                 session.setAttribute("adminId", res_state.getInt(idColumn));
                 response.sendRedirect("admin.jsp");
             } else if ("customer".equals(userType)) {
-                session.setAttribute("repId", res_state.getInt(idColumn));
-                response.sendRedirect("rep.jsp");
-            } else {
-                session.setAttribute("user_id", res_state.getInt(idColumn));
+            	session.setAttribute("user_id", res_state.getInt(idColumn));
                 response.sendRedirect("welcome.jsp");
+            } else {
+            	session.setAttribute("repId", res_state.getInt(idColumn));
+                response.sendRedirect("rep.jsp");
             }
         } else {
             // Failed login
