@@ -112,7 +112,8 @@
     <h3>Quick Actions</h3>
     <ul>
         <li><a href="answer_questions.jsp">View & Answer Customer Questions</a></li>
-        <li><a href="browse_auctions.jsp">Browse Active Auctions</a></li>
+        <li><a href="manage_users.jsp">Manage Users</a></li>
+        <li><a href="manage_auctions.jsp">Manage Active Auctions</a></li>
     </ul>
 
 </body>
