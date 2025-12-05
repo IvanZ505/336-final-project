@@ -15,13 +15,15 @@
 </head>
 <body>
     <%-- shows the auction history of the user --%>
-    <%-- includes catgories of auctions the user won and the items they have or are selling --%> 
+    <%-- includes categories of auctions the user won and the items they have or are selling --%> 
 
     <div class="navbar">
         <a href="welcome.jsp">Home</a> | 
         <a href="create_auction.jsp">Sell Item</a> | 
         <a href="browse_auctions.jsp">Browse Auctions</a> | 
         <a href="help.jsp">Help</a> |
+        <a href="search.jsp">Search</a> |
+        <a href="alerts.jsp">Alerts</a> |
         <a href="logout.jsp">Logout</a>
     </div>
 

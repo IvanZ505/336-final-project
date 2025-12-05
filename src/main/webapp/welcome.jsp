@@ -28,7 +28,9 @@
         <li><a href="browse_auctions.jsp">Browse Active Auctions</a></li>
         <li><a href="create_auction.jsp">Sell an Item</a></li>
         <li><a href="my_history.jsp">Bids & Sales History</a></li>
-        <li><a href="help.jsp">Get Customer Serice Help</a></li>
+        <li><a href="help.jsp">Get Customer Service Help</a></li>
+        <li><a href="search.jsp">Search</a></li>
+        <li><a href="alerts.jsp">Alerts</a></li>
     </ul>
     
     <br>

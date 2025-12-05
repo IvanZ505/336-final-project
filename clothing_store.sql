@@ -47,16 +47,16 @@ CREATE TABLE `ITEM` (
 
 CREATE TABLE `SHIRT` (
     `item_id` INT PRIMARY KEY,
-    `condition` VARCHAR(10),
+    `item_condition` VARCHAR(10),
     `color` VARCHAR(15),
     `size` VARCHAR(5),
     `brand` VARCHAR(20),
     CONSTRAINT `fk_shirt_item` FOREIGN KEY (`item_id`) REFERENCES `ITEM`(`item_id`) ON DELETE CASCADE
-);
+); 
 
 CREATE TABLE `BAG` (
     `item_id` INT PRIMARY KEY,
-    `condition` VARCHAR(10),
+    `item_condition` VARCHAR(10),
     `material` VARCHAR(20),
     `brand` VARCHAR(20),
     `color` VARCHAR(15),
@@ -65,7 +65,7 @@ CREATE TABLE `BAG` (
 
 CREATE TABLE `SHOE` (
     `item_id` INT PRIMARY KEY,
-    `condition` VARCHAR(10),
+    `item_condition` VARCHAR(10),
     `brand` VARCHAR(20),
     `size` DECIMAL(3,1),
     CONSTRAINT `fk_shoe_item` FOREIGN KEY (`item_id`) REFERENCES `ITEM`(`item_id`) ON DELETE CASCADE
@@ -84,19 +84,19 @@ CREATE TABLE `SUPPORTS` (
 );
 
 CREATE TABLE `SETS_ALERT` (
+	`alert_id` INT AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT,
     `item_id` INT,
     `size` VARCHAR(5),
     `brand` VARCHAR(20),
+    `category` VARCHAR(10),
     `keywords` VARCHAR(30),
     `is_active` TINYINT(1) DEFAULT 1,
-    `condition` VARCHAR(20),
+    `item_condition` VARCHAR(10),
     `color` VARCHAR(15),
     `min_price` DECIMAL(10, 2),
     `max_price` DECIMAL(10, 2),
-    PRIMARY KEY (`user_id`, `item_id`),
-    CONSTRAINT `fk_alert_user` FOREIGN KEY (`user_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE,
-    CONSTRAINT `fk_alert_item` FOREIGN KEY (`item_id`) REFERENCES `ITEM`(`item_id`) ON DELETE CASCADE
+    CONSTRAINT `fk_alert_user` FOREIGN KEY (`user_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `BID` (
@@ -135,7 +135,7 @@ CREATE TABLE `PLACES` (
 INSERT INTO `USER` (`name`, `address`, `email`, `password`, `username`) 
 VALUES ('Test User', '123 Main St', 'test@example.com', 'password123', 'testuser');
 
-INSERT INTO `admin` (`admin_id`, `admin_pass`) VALUES (1, '12345');
+INSERT INTO `ADMIN` (`admin_id`, `admin_pass`) VALUES (1, '12345');
 -- CRITICAL FIX: Add the test user to the END_USER table as well
 -- This is required because of the Foreign Key constraint on the ITEM table (seller_id -> end_user.user_id)
 INSERT INTO `END_USER` (`user_id`) 

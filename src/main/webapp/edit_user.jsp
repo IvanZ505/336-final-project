@@ -9,13 +9,15 @@
 </head>
 <body>
     <%-- nav bar --%>
-    <div class="navbar">
-        <a href="rep.jsp">Dashboard</a> | 
-        <a href="answer_questions.jsp">Answer Questions</a> | 
-        <a href="manage_users.jsp">Manage Users</a> |
-        <a href="manage_auctions.jsp">Manage Auctions</a> |
-        <a href="logout.jsp">Logout</a>
-    </div>
+	<div class="navbar">
+	    <a href="welcome.jsp">Home</a> | 
+	    <a href="create_auction.jsp">Sell Item</a> | 
+	    <a href="browse_auctions.jsp">Browse Auctions</a> | 
+	    <a href="help.jsp">Help</a> |
+	    <a href="search.jsp">Search</a> |
+	    <a href="alerts.jsp">Alerts</a> |
+	    <a href="logout.jsp">Logout</a>
+	</div>
 
     <h2>Edit User Account</h2>
     

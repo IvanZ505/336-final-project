@@ -12,13 +12,15 @@
 <body>
 
     <%-- nav bar to hold links to other parts of the site --%>
-    <div class="navbar">
-        <a href="welcome.jsp">Home</a> | 
-        <a href="create_auction.jsp">Sell Item</a> | 
-        <a href="browse_auctions.jsp">Browse Auctions</a> | 
-        <a href="help.jsp">Help</a> |
-        <a href="logout.jsp">Logout</a>
-    </div>
+	<div class="navbar">
+	    <a href="welcome.jsp">Home</a> | 
+	    <a href="create_auction.jsp">Sell Item</a> | 
+	    <a href="browse_auctions.jsp">Browse Auctions</a> | 
+	    <a href="help.jsp">Help</a> |
+	    <a href="search.jsp">Search</a> |
+	    <a href="alerts.jsp">Alerts</a> |
+	    <a href="logout.jsp">Logout</a>
+	</div>
 
     <h2>Active Auctions</h2>
 
