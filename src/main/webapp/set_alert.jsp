@@ -36,7 +36,7 @@
     <input type="text" name="brand">
 
     <label>Condition:</label>
-    <input type="text" name="condition" placeholder="e.g. new, used">
+    <input type="text" name="item_condition" placeholder="e.g. new, used">
 
     <label>Color:</label>
     <input type="text" name="color">

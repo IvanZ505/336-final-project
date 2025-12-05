@@ -10,33 +10,35 @@
 
     int userId = (int) session.getAttribute("user_id");
 
-    // Get and normalize parameters
-    String keywords = request.getParameter("keyword");
-    String category = request.getParameter("category");
-    String minP     = request.getParameter("minPrice");
-    String maxP     = request.getParameter("maxPrice");
-
-    keywords = (keywords == null || keywords.trim().isEmpty()) ? null : keywords.trim();
-    category = (category == null || category.trim().isEmpty()) ? null : category.trim();
-    minP     = (minP == null || minP.trim().isEmpty()) ? null : minP;
-    maxP     = (maxP == null || maxP.trim().isEmpty()) ? null : maxP;
+    // Read all fields correctly
+    String keywords       = trim(request.getParameter("keyword"));
+    String size           = trim(request.getParameter("size"));
+    String brand          = trim(request.getParameter("brand"));
+    String itemCondition  = trim(request.getParameter("item_condition"));
+    String color          = trim(request.getParameter("color"));
+    String minP           = trim(request.getParameter("minPrice"));
+    String maxP           = trim(request.getParameter("maxPrice"));
 
     try {
         ApplicationDB db = new ApplicationDB();
         Connection con = db.getConnection();
 
-        String sql =
-            "INSERT INTO SETS_ALERT (user_id, keywords, condition, color, size, brand, min_price, max_price, is_active) " +
-            "VALUES (?, ?, ?, NULL, NULL, NULL, ?, ?, 1)";
+        String sql = 
+            "INSERT INTO SETS_ALERT (user_id, keywords, size, brand, item_condition, color, min_price, max_price, is_active) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)";
 
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, userId);
         ps.setString(2, keywords);
-        ps.setString(3, category);  // store category in condition column
-        ps.setString(4, minP);
-        ps.setString(5, maxP);
+        ps.setString(3, size);
+        ps.setString(4, brand);
+        ps.setString(5, itemCondition);
+        ps.setString(6, color);
+        ps.setString(7, minP);
+        ps.setString(8, maxP);
 
         ps.executeUpdate();
+
         db.closeConnection(con);
 
         request.setAttribute("success", "Alert created successfully.");
@@ -47,4 +49,13 @@
         request.setAttribute("error", "Could not create alert: " + e.getMessage());
         request.getRequestDispatcher("alerts.jsp").forward(request, response);
     }
+
+%>
+
+<%! 
+private String trim(String s) {
+    if (s == null) return null;
+    s = s.trim();
+    return s.isEmpty() ? null : s;
+}
 %>

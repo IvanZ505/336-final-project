@@ -56,7 +56,7 @@ td, th { padding: 10px; border: 1px solid rgba(255,255,255,0.2); }
     Connection con = db.getConnection();
 
     String sql =
-        "SELECT alert_id, keywords, size, brand, condition, color, " +
+        "SELECT alert_id, keywords, size, brand, item_condition, color, " +
         "       min_price, max_price, is_active " +
         "FROM SETS_ALERT WHERE user_id=?";
 
@@ -87,7 +87,7 @@ while (rs.next()) {
     <td><%= rs.getString("keywords") == null ? "" : rs.getString("keywords") %></td>
     <td><%= rs.getString("size") == null ? "" : rs.getString("size") %></td>
     <td><%= rs.getString("brand") == null ? "" : rs.getString("brand") %></td>
-    <td><%= rs.getString("condition") == null ? "" : rs.getString("condition") %></td>
+    <td><%= rs.getString("item_condition") == null ? "" : rs.getString("item_condition") %></td>
     <td><%= rs.getString("color") == null ? "" : rs.getString("color") %></td>
     <td>
         <%
