@@ -28,6 +28,25 @@ td, th { padding: 10px; border: 1px solid rgba(255,255,255,0.2); }
 
 <h2>Your Alerts</h2>
 
+<div style="margin: 15px 0;">
+    <a href="alert_match.jsp" 
+       style="
+           display:inline-block;
+           padding:10px 18px;
+           background:#ffdd57;
+           color:#000;
+           font-weight:bold;
+           border-radius:6px;
+           text-decoration:none;
+           transition:0.2s;
+       "
+       onmouseover="this.style.background='#ffe680';"
+       onmouseout="this.style.background='#ffdd57';">
+        🔍 View Items Matching Your Alerts
+    </a>
+</div>
+
+
 <%
     String msg = request.getParameter("msg");
     String error = (String) request.getAttribute("error");

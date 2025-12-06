@@ -76,7 +76,7 @@
         PreparedStatement ps_subtype = null;
 
         if ("shirt".equals(category)) {
-            subtype_query = "INSERT INTO SHIRT (item_id, brand, color, size, `condition`) VALUES (?, ?, ?, ?, ?)";
+            subtype_query = "INSERT INTO SHIRT (item_id, brand, color, size, `item_condition`) VALUES (?, ?, ?, ?, ?)";
             ps_subtype = con.prepareStatement(subtype_query);
             ps_subtype.setInt(1, new_item_id);
             ps_subtype.setString(2, request.getParameter("shirt-brand"));
@@ -84,7 +84,7 @@
             ps_subtype.setString(4, request.getParameter("shirt-size"));
             ps_subtype.setString(5, request.getParameter("shirt-condition"));
         } else if ("bag".equals(category)) {
-            subtype_query = "INSERT INTO BAG (item_id, brand, material, color, `condition`) VALUES (?, ?, ?, ?, ?)";
+            subtype_query = "INSERT INTO BAG (item_id, brand, material, color, `item_condition`) VALUES (?, ?, ?, ?, ?)";
             ps_subtype = con.prepareStatement(subtype_query);
             ps_subtype.setInt(1, new_item_id);
             ps_subtype.setString(2, request.getParameter("bag-brand"));
@@ -92,7 +92,7 @@
             ps_subtype.setString(4, request.getParameter("bag-color"));
             ps_subtype.setString(5, request.getParameter("bag-condition"));
         } else if ("shoe".equals(category)) {
-            subtype_query = "INSERT INTO SHOE (item_id, brand, size, `condition`) VALUES (?, ?, ?, ?)";
+            subtype_query = "INSERT INTO SHOE (item_id, brand, size, `item_condition`) VALUES (?, ?, ?, ?)";
             ps_subtype = con.prepareStatement(subtype_query);
             ps_subtype.setInt(1, new_item_id);
             ps_subtype.setString(2, request.getParameter("shoe-brand"));
