@@ -11,7 +11,6 @@
 
     int userId = (int) session.getAttribute("user_id");
 
-    // FIXED: Read alert_id from POST, not session
     String alertIdStr = request.getParameter("alert_id");
 
     if (alertIdStr == null) {

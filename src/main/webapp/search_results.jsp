@@ -115,12 +115,12 @@
 %>
 
             <tr>
-                <td><a href="item_details.jsp?itemId=<%= id %>"><%= title %></a></td>
+                <td><a href="item_details.jsp?id=<%= id %>"><%= title %></a></td>
                 <td><%= cat %></td>
                 <td><%= price == null ? "N/A" : String.format("$%.2f", price) %></td>
                 <td><%= end != null ? end.toString() : "No end" %></td>
                 <td><%= seller %></td>
-                <td><a href="item_details.jsp?itemId=<%= id %>">View</a></td>
+                <td><a href="item_details.jsp?id=<%= id %>">View</a></td>
             </tr>
 
 <%

@@ -87,7 +87,7 @@
                 out.println("<li><strong>Brand:</strong> " + res_setShirt.getString("brand") + "</li>");
                 out.println("<li><strong>Color:</strong> " + res_setShirt.getString("color") + "</li>");
                 out.println("<li><strong>Size:</strong> " + res_setShirt.getString("size") + "</li>");
-                out.println("<li><strong>Condition:</strong> " + res_setShirt.getString("condition") + "</li>");
+                out.println("<li><strong>Condition:</strong> " + res_setShirt.getString("item_condition") + "</li>");
             }
 
             // check shoe table
@@ -98,7 +98,7 @@
                 out.println("<li><strong>Type:</strong> Shoe</li>");
                 out.println("<li><strong>Brand:</strong> " + res_setShoe.getString("brand") + "</li>");
                 out.println("<li><strong>Size:</strong> " + res_setShoe.getDouble("size") + "</li>");
-                out.println("<li><strong>Condition:</strong> " + res_setShoe.getString("condition") + "</li>");
+                out.println("<li><strong>Condition:</strong> " + res_setShoe.getString("item_condition") + "</li>");
             }
 
             // check bag table

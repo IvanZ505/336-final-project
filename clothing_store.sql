@@ -96,6 +96,7 @@ CREATE TABLE `SETS_ALERT` (
     `color` VARCHAR(15),
     `min_price` DECIMAL(10, 2),
     `max_price` DECIMAL(10, 2),
+    `alert_message` VARCHAR(255) NULL,    
     CONSTRAINT `fk_alert_user` FOREIGN KEY (`user_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE
 );
 
@@ -131,12 +132,13 @@ CREATE TABLE `PLACES` (
     CONSTRAINT `fk_places_bid` FOREIGN KEY (`bid_id`) REFERENCES `BID`(`bid_id`) ON DELETE CASCADE
 );
 
--- Add a sample user for testing the login functionality
-INSERT INTO `USER` (`name`, `address`, `email`, `password`, `username`) 
-VALUES ('Test User', '123 Main St', 'test@example.com', 'password123', 'testuser');
-
 INSERT INTO `ADMIN` (`admin_id`, `admin_pass`) VALUES (1, '12345');
--- CRITICAL FIX: Add the test user to the END_USER table as well
--- This is required because of the Foreign Key constraint on the ITEM table (seller_id -> end_user.user_id)
-INSERT INTO `END_USER` (`user_id`) 
-SELECT `user_id` FROM `USER` WHERE `username` = 'testuser';
+
+
+-- Add a sample user for testing the login functionality
+-- INSERT INTO `USER` (`name`, `address`, `email`, `password`, `username`) 
+-- VALUES ('Test User', '123 Main St', 'test@example.com', 'password123', 'testuser');
+
+
+-- INSERT INTO `END_USER` (`user_id`) 
+-- SELECT `user_id` FROM `USER` WHERE `username` = 'testuser';

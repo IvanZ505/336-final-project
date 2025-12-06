@@ -85,6 +85,18 @@
                 if (ps != null) ps.close();
             } catch (SQLException ignore) {}
         }
+        
+     // AUTO-CLOSE FINISHED AUCTIONS
+        String closeSql = 
+            "UPDATE ITEM " +
+            "SET status = 'closed' " +
+            "WHERE auction_end < NOW() " +
+            "AND status <> 'closed'";
+
+        PreparedStatement psClose = con.prepareStatement(closeSql);
+        psClose.executeUpdate();
+        psClose.close();
+
     %>
 
     <div class="greeting">Admin Dashboard</div>
@@ -123,7 +135,12 @@
                     out.println("<p style='color:red;'>Unable to connect to database.</p>");
                 } else {
                     // Total Earnings (sum of all closed/sold auctions)
-                    String totalEarningsQuery = "SELECT SUM(current_bid) as total FROM ITEM WHERE status = 'closed' AND current_bid IS NOT NULL";
+                    String totalEarningsQuery =
+					    "SELECT SUM(i.current_bid) AS total " +
+					    "FROM ITEM i " +
+					    "WHERE i.current_bid IS NOT NULL " +
+					    "AND i.auction_end < NOW()";
+
                     ps = con.prepareStatement(totalEarningsQuery);
                     rs = ps.executeQuery();
                     
@@ -153,12 +170,15 @@
                 <th>Status</th>
             </tr>
             <%
-                    String itemEarningsQuery = "SELECT i.item_id, i.title, i.current_bid, i.status, u.username " +
-                                              "FROM ITEM i " +
-                                              "JOIN END_USER eu ON i.seller_id = eu.user_id " +
-                                              "JOIN USER u ON eu.user_id = u.user_id " +
-                                              "WHERE i.status = 'closed' AND i.current_bid IS NOT NULL " +
-                                              "ORDER BY i.current_bid DESC";
+		            String itemEarningsQuery =
+			            "SELECT i.item_id, i.title, i.current_bid, i.status, u.username " +
+						"FROM ITEM i " +
+						"JOIN END_USER eu ON i.seller_id = eu.user_id " +
+						"JOIN USER u ON eu.user_id = u.user_id " +
+						"WHERE i.current_bid IS NOT NULL " +
+						"AND i.auction_end < NOW() " +
+						"ORDER BY i.current_bid DESC";
+
                     ps = con.prepareStatement(itemEarningsQuery);
                     rs = ps.executeQuery();
                     
