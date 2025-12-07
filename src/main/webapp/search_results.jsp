@@ -58,6 +58,24 @@
 </div>
 
     <div class="results-container">
+    
+	<%
+	String sortLabel = request.getParameter("sort");
+	if (sortLabel == null) sortLabel = "newest";
+	%>
+	
+	<p style="color:white; margin-bottom:12px;">
+	    Sorted by:
+	    <strong>
+	    <%= 
+	        sortLabel.equals("price_asc") ? "Price Low → High" :
+	        sortLabel.equals("price_desc") ? "Price High → Low" :
+	        sortLabel.equals("ending_soon") ? "Ending Soon" :
+	        "Newest"
+	    %>
+	    </strong>
+	</p>
+    
         <h2>Search Results</h2>
 
 <%

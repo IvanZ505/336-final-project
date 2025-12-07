@@ -18,6 +18,7 @@
         <a href="help.jsp">Help</a> |
         <a href="search.jsp">Search</a> |
         <a href="alerts.jsp">Alerts</a> |
+        <a href="faq.jsp">FAQ</a> |
         <a href="logout.jsp">Logout</a>
     </div>
 
