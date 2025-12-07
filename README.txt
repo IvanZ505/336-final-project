@@ -32,9 +32,9 @@ This is a database-driven web application for an online clothing auction system 
 1. Ensure you have MySQL installed and running.
 2. Locate the `clothing_store.sql` file in the project root.
 3. Import the SQL file to initialize the schema and default data:
-   ```bash
+```bash
    mysql -u root -p < clothing_store.sql
-   ```
+```
    *(Note: This creates the `clothing_store` database and tables.)*
 4. Verify the database connection settings in `src/main/java/com/cs336/pkg/ApplicationDB.java` if you changed your MySQL root password (default assumed).
 
