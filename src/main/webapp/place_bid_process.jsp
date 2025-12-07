@@ -36,16 +36,53 @@
         con.setAutoCommit(false); // start transaction for data integrity (multiple things happen at once, only works if all works)
 
         // lock item row so no race conditions happen
-        PreparedStatement ps_lock = con.prepareStatement("SELECT current_bid, bid_increment FROM ITEM WHERE item_id = ? FOR UPDATE");
+        PreparedStatement ps_lock = con.prepareStatement("SELECT title, current_bid, bid_increment FROM ITEM WHERE item_id = ? FOR UPDATE");
         ps_lock.setInt(1, itemID);
         ResultSet rs_lock = ps_lock.executeQuery();
         rs_lock.next();
+        String itemTitle = rs_lock.getString("title");
         double currentDbPrice = rs_lock.getDouble("current_bid");
         double increment = rs_lock.getDouble("bid_increment");
 
         // make sure price hasn't changed since page loaded
         if (bid_amount < (currentDbPrice + increment)) {
              throw new Exception("Please refresh, someone else placed a bid while you were watching.");
+        }
+
+        // FIND PREVIOUS HIGHEST BIDDER TO ALERT THEM (IF THEY ARE NOT THE SAME AS CURRENT USER)
+        String findPrevBidderSql = 
+            "SELECT p.user_id " +
+            "FROM RECEIVES r " +
+            "JOIN BID b ON r.bid_id = b.bid_id " +
+            "JOIN PLACES p ON b.bid_id = p.bid_id " +
+            "WHERE r.item_id = ? " +
+            "ORDER BY b.bid_amount DESC LIMIT 1";
+            
+        PreparedStatement psPrev = con.prepareStatement(findPrevBidderSql);
+        psPrev.setInt(1, itemID);
+        ResultSet rsPrev = psPrev.executeQuery();
+        
+        if (rsPrev.next()) {
+            int prevBidderId = rsPrev.getInt("user_id");
+            if (prevBidderId != userID) {
+                // Alert previous bidder they have been outbid
+                String outbidMsg = "You have been outbid on item '" + itemTitle + "'. Current price: $" + String.format("%.2f", bid_amount);
+                
+                // Check for duplicate alert to avoid spamming
+                String checkDupSql = "SELECT alert_id FROM SETS_ALERT WHERE user_id=? AND alert_message=? AND is_active=1";
+                PreparedStatement psCheck = con.prepareStatement(checkDupSql);
+                psCheck.setInt(1, prevBidderId);
+                psCheck.setString(2, outbidMsg);
+                if (!psCheck.executeQuery().next()) {
+                    // Create alert
+                    PreparedStatement psAlert = con.prepareStatement(
+                        "INSERT INTO SETS_ALERT (user_id, alert_message, is_active) VALUES (?, ?, 1)"
+                    );
+                    psAlert.setInt(1, prevBidderId);
+                    psAlert.setString(2, outbidMsg);
+                    psAlert.executeUpdate();
+                }
+            }
         }
 
         // place manual bids
@@ -97,6 +134,17 @@
             place_bid(con, defID, itemID, counterbid_amount);
             update_item_price(con, itemID, counterbid_amount);
             
+            // Alert manual bidder immediately if they are instantly outbid by auto-bidder
+            if (counterbid_amount > bid_amount) {
+                 String outbidMsg = "Your bid on '" + itemTitle + "' was immediately outbid by an automatic bidder. Current price: $" + String.format("%.2f", counterbid_amount);
+                 PreparedStatement psAlert = con.prepareStatement(
+                    "INSERT INTO SETS_ALERT (user_id, alert_message, is_active) VALUES (?, ?, 1)"
+                 );
+                 psAlert.setInt(1, userID);
+                 psAlert.setString(2, outbidMsg);
+                 psAlert.executeUpdate();
+            }
+            
             // loop of auto-bidding if current user also has auto-bid
             // keep checking limits of each user and set the auto-bids higher until one reaches their limit
             // the other person then wins
@@ -118,9 +166,28 @@
                          place_bid(con, defID, itemID, counterbid_amount);
                          update_item_price(con, itemID, counterbid_amount);
                      } else {
+                         // Defender hit limit - ALERT DEFENDER
+                         String limitMsg = "Your automatic bid limit of $" + String.format("%.2f", defender_lim) + " for item '" + itemTitle + "' has been exceeded.";
+                         PreparedStatement psAlert = con.prepareStatement(
+                            "INSERT INTO SETS_ALERT (user_id, alert_message, is_active) VALUES (?, ?, 1)"
+                         );
+                         psAlert.setInt(1, defID);
+                         psAlert.setString(2, limitMsg);
+                         psAlert.executeUpdate();
                          break; // defender hit limit
                      }
                 } else {
+                    // Current user hit limit or didn't have auto-bid
+                    if (is_auto && auto_lim != null && auto_lim <= counterbid_amount) {
+                         // Attacker hit limit - ALERT ATTACKER
+                         String limitMsg = "Your automatic bid limit of $" + String.format("%.2f", auto_lim) + " for item '" + itemTitle + "' has been reached/exceeded.";
+                         PreparedStatement psAlert = con.prepareStatement(
+                            "INSERT INTO SETS_ALERT (user_id, alert_message, is_active) VALUES (?, ?, 1)"
+                         );
+                         psAlert.setInt(1, userID);
+                         psAlert.setString(2, limitMsg);
+                         psAlert.executeUpdate();
+                    }
                     break; // current user hit limit or didn't have auto-bid
                 }
             }
