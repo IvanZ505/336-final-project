@@ -29,7 +29,16 @@ CREATE TABLE `END_USER` (
     CONSTRAINT `fk_enduser_user` FOREIGN KEY (`user_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE
 );
 
--- UPDATED: Added ON DELETE CASCADE so items are removed if the seller is deleted
+-- NEW: Lookup table for item categories
+CREATE TABLE `ITEM_CATEGORIES` (
+    `category_id` INT PRIMARY KEY AUTO_INCREMENT,
+    `category_name` VARCHAR(50) NOT NULL UNIQUE,
+    `table_name` VARCHAR(50) NOT NULL UNIQUE,
+    `created_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `is_active` TINYINT(1) DEFAULT 1
+);
+
+-- UPDATED: Added category_id foreign key
 CREATE TABLE `ITEM` (
     `item_id` INT PRIMARY KEY AUTO_INCREMENT,
     `title` VARCHAR(50) NOT NULL,
@@ -42,7 +51,9 @@ CREATE TABLE `ITEM` (
     `current_bid` DECIMAL(10, 2),
     `description` TEXT,
     `seller_id` INT,
-    CONSTRAINT `fk_item_seller` FOREIGN KEY (`seller_id`) REFERENCES `END_USER`(`user_id`) ON DELETE CASCADE
+    `category_id` INT,
+    CONSTRAINT `fk_item_seller` FOREIGN KEY (`seller_id`) REFERENCES `END_USER`(`user_id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_item_category` FOREIGN KEY (`category_id`) REFERENCES `ITEM_CATEGORIES`(`category_id`) ON DELETE SET NULL
 );
 
 CREATE TABLE `SHIRT` (
@@ -84,7 +95,7 @@ CREATE TABLE `SUPPORTS` (
 );
 
 CREATE TABLE `SETS_ALERT` (
-	`alert_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `alert_id` INT AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT,
     `item_id` INT,
     `size` VARCHAR(5),
@@ -151,13 +162,18 @@ BEGIN
     END IF;
 END;
 
-
 DELIMITER ;
 
+-- Insert default data
 INSERT INTO `ADMIN` (`admin_id`, `admin_pass`) VALUES (1, '12345');
 
+-- Insert existing categories into ITEM_CATEGORIES table
+INSERT INTO `ITEM_CATEGORIES` (`category_name`, `table_name`) VALUES 
+('Shirt', 'SHIRT'),
+('Bag', 'BAG'),
+('Shoe', 'SHOE');
 
--- Add a sample user for testing the login functionality
+-- Add sample users
 INSERT INTO `USER` (`name`, `address`, `email`, `password`, `username`) 
 VALUES ('Test User', '123 Main St', 'test@example.com', 'password123', 'testuser');
 

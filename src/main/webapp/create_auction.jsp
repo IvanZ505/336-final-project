@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*, com.cs336.pkg.ApplicationDB" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,17 +9,24 @@
 <script>
     //dynamic form fields depending on category of item chosen
     function showSubtypeFields() {
-        // start by hiding all the kinds of subtypes
-        document.getElementById('shirt-fields').style.display = 'none';
-        document.getElementById('bag-fields').style.display = 'none';
-        document.getElementById('shoe-fields').style.display = 'none';
+        // Hide all category field containers
+        var containers = document.querySelectorAll('[id$="-fields"]');
+        for (var i = 0; i < containers.length; i++) {
+            containers[i].style.display = 'none';
+        }
 
-        // figure out what catgory was selected by user
-        var category = document.getElementById('category').value;
+        // Get selected category table name
+        var categorySelect = document.getElementById('category');
+        var selectedOption = categorySelect.options[categorySelect.selectedIndex];
+        var tableName = selectedOption.getAttribute('data-table');
 
-        // show the corresponding div
-        if (category) {
-            document.getElementById(category + '-fields').style.display = 'block';
+        // Show the corresponding div (convert to lowercase and add -fields)
+        if (tableName) {
+            var fieldId = tableName.toLowerCase() + '-fields';
+            var fieldDiv = document.getElementById(fieldId);
+            if (fieldDiv) {
+                fieldDiv.style.display = 'block';
+            }
         }
     }
 </script>
@@ -54,7 +62,6 @@
 	    font-size: 16px;
 	    outline: none;
 	    transition: border-color 0.3s ease;
-
 	}
 	
 	input::-webkit-outer-spin-button,
@@ -66,7 +73,7 @@
 	input[type="number"] {
 	  -moz-appearance: textfield;
 	}
-	</style>
+</style>
 </head>
 <body onload="showSubtypeFields()">
 
@@ -95,13 +102,44 @@
         <label for="description">Description <span class="optional">(Optional)</span>:</label><br>
         <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
 
-        <%-- selection of category, starts off the chain of events leading to showing subtypes --%>
+        <%-- selection of category, dynamically loaded from database --%>
         <label for="category">Category <span class="required">*</span>:</label>
         <select id="category" name="category" onchange="showSubtypeFields()" required>
             <option value="">--Select a Category--</option>
-            <option value="shirt">Shirt</option>
-            <option value="bag">Bag</option>
-            <option value="shoe">Shoe</option>
+            <%
+                Connection con = null;
+                PreparedStatement ps = null;
+                ResultSet rs = null;
+                
+                try {
+                    ApplicationDB db = new ApplicationDB();
+                    con = db.getConnection();
+                    
+                    // Get all active categories
+                    String categoryQuery = "SELECT category_id, category_name, table_name FROM ITEM_CATEGORIES WHERE is_active = 1 ORDER BY category_name";
+                    ps = con.prepareStatement(categoryQuery);
+                    rs = ps.executeQuery();
+                    
+                    while (rs.next()) {
+                        int categoryId = rs.getInt("category_id");
+                        String categoryName = rs.getString("category_name");
+                        String tableName = rs.getString("table_name");
+            %>
+                        <option value="<%= categoryId %>" data-table="<%= tableName %>"><%= categoryName %></option>
+            <%
+                    }
+                    
+                    db.closeConnection(con);
+                } catch (Exception e) {
+                    out.println("<option value=''>Error loading categories</option>");
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (rs != null) rs.close();
+                        if (ps != null) ps.close();
+                    } catch (SQLException ignore) {}
+                }
+            %>
         </select><br><br>
 
         <%-- the dynamic fields that are usually hidden, shown depending on what selected --%>

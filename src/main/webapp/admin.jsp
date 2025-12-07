@@ -13,6 +13,7 @@
     <%-- nav bar --%>
     <div class="navbar">
         <a href="admin.jsp">Dashboard</a> | 
+        <a href="create_category.jsp">Create Category</a> |
         <a href="logout.jsp">Logout</a>
     </div>
 
