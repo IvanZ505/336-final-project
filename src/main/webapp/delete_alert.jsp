@@ -12,6 +12,9 @@
     int userId = (int) session.getAttribute("user_id");
 
     String alertIdStr = request.getParameter("alert_id");
+    
+    request.removeAttribute("success");
+    request.removeAttribute("error");
 
     if (alertIdStr == null) {
         request.setAttribute("error", "No alert selected.");

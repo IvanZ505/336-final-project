@@ -24,6 +24,16 @@
 
     <h2>Active Auctions</h2>
 
+    <!-- SORT DROPDOWN -->
+    <form method="get" class="sort-box">
+        <label>Sort by:</label>
+        <select name="sort" onchange="this.form.submit()">
+            <option value="ending_soon">Ending Soon</option>
+            <option value="price_asc">Price Low → High</option>
+            <option value="price_desc">Price High → Low</option>
+            <option value="newest">Newest</option>
+        </select>
+    </form>
     <%-- auction table, lists all items for sale rn, rows dynamically generated through java code --%>
     <table>
         <tr>
@@ -33,18 +43,35 @@
             <th>Seller</th>
             <th>Action</th>
         </tr>
+        
+        
 
         <%
             try {
                 // connect to db
                 com.cs336.pkg.ApplicationDB db = new com.cs336.pkg.ApplicationDB();
                 Connection con = db.getConnection();
+                
+                String sort = request.getParameter("sort");
+                if (sort == null) sort = "ending_soon";
+
+                String orderBy;
+                if ("price_asc".equals(sort)) {
+                    orderBy = " ORDER BY i.current_bid ASC ";
+                } else if ("price_desc".equals(sort)) {
+                    orderBy = " ORDER BY i.current_bid DESC ";
+                } else if ("newest".equals(sort)) {
+                    orderBy = " ORDER BY i.auction_start DESC ";
+                } else {
+                    orderBy = " ORDER BY i.auction_end ASC ";
+                }
+
 
                 // show the items that are for sale right now
                 String query = "SELECT i.item_id, i.title, i.current_bid, i.auction_end, u.username " +
                                "FROM ITEM i JOIN USER u ON i.seller_id = u.user_id " +
                                "WHERE i.status = 'open' AND i.auction_end > NOW() " +
-                               "ORDER BY i.auction_end ASC"; // Show items ending soonest first.
+                               orderBy; // Show items ending soonest first.
                 
                 // query execution
                 Statement statem = con.createStatement();
@@ -64,7 +91,11 @@
                 <td><%= title %></td>
                 <td>$<%= String.format("%.2f", price) %></td> <%-- Format price to 2 decimal places (e.g. 10.50) --%>
                 <td><%= end %></td>
-                <td><%= seller %></td>
+                <td>
+				  <a href="user_activity.jsp?username=<%= seller %>">
+				      <%= seller %>
+				  </a>
+				</td>
                 <%-- put item id into url--%>
                 <td><a href="item_details.jsp?id=<%= itemID %>">View & Bid</a></td>
             </tr>

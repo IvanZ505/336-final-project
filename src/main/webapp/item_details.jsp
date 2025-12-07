@@ -190,5 +190,11 @@
         %>
     </table>
 
+	<hr>
+<h3>Similar Auctions (Past 30 Days)</h3>
+<a href="similar_items.jsp?item_id=<%= item_id %>">
+    View Similar Auctions
+</a>
+	
 </body>
 </html>

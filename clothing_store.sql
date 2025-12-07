@@ -123,7 +123,6 @@ CREATE TABLE `RECEIVES` (
     CONSTRAINT `fk_receives_bid` FOREIGN KEY (`bid_id`) REFERENCES `BID`(`bid_id`) ON DELETE CASCADE
 );
 
-
 CREATE TABLE `PLACES` (
     `user_id` INT,
     `bid_id` INT,
@@ -132,13 +131,41 @@ CREATE TABLE `PLACES` (
     CONSTRAINT `fk_places_bid` FOREIGN KEY (`bid_id`) REFERENCES `BID`(`bid_id`) ON DELETE CASCADE
 );
 
+DELIMITER $$
+
+CREATE TRIGGER close_ended_auctions
+BEFORE UPDATE ON ITEM
+FOR EACH ROW
+BEGIN
+    IF NEW.auction_end < NOW() AND OLD.status <> 'closed' THEN
+        SET NEW.status = 'closed';
+
+        SET NEW.current_bid = (
+            SELECT b.bid_amount
+            FROM RECEIVES r
+            JOIN BID b ON r.bid_id = b.bid_id
+            WHERE r.item_id = NEW.item_id
+            ORDER BY b.bid_amount DESC
+            LIMIT 1
+        );
+    END IF;
+END;
+
+
+DELIMITER ;
+
 INSERT INTO `ADMIN` (`admin_id`, `admin_pass`) VALUES (1, '12345');
 
 
 -- Add a sample user for testing the login functionality
--- INSERT INTO `USER` (`name`, `address`, `email`, `password`, `username`) 
--- VALUES ('Test User', '123 Main St', 'test@example.com', 'password123', 'testuser');
+INSERT INTO `USER` (`name`, `address`, `email`, `password`, `username`) 
+VALUES ('Test User', '123 Main St', 'test@example.com', 'password123', 'testuser');
 
+INSERT INTO `USER` (`name`, `address`, `email`, `password`, `username`) 
+VALUES ('Test User', '123 Main St', 'test2@example.com', 'password123', 'testuser2');
 
--- INSERT INTO `END_USER` (`user_id`) 
--- SELECT `user_id` FROM `USER` WHERE `username` = 'testuser';
+INSERT INTO `END_USER` (`user_id`) 
+SELECT `user_id` FROM `USER` WHERE `username` = 'testuser';
+
+INSERT INTO `END_USER` (`user_id`) 
+SELECT `user_id` FROM `USER` WHERE `username` = 'testuser2';
